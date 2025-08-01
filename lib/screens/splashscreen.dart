@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:mealplanner/widgets/additions.dart';
 
@@ -159,7 +160,25 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           ),
           const SizedBox(height: 16),
-          Text('Already have account? Login'),
+          RichText(
+            text: TextSpan(
+              children: [
+                TextSpan(text: 'Already have account? '),
+                TextSpan(
+                  text: 'Login',
+                  style: const TextStyle(
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.underline,
+                  ),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      print('login button clicked');
+                    },
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
