@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:mealplanner/screens/onboarding.dart';
 import 'package:mealplanner/widgets/additions.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -93,7 +94,14 @@ class _SplashScreenState extends State<SplashScreen> {
                 elevation: 6,
                 minimumSize: const Size.fromHeight(48),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const OnboardingScreen(),
+                  ),
+                );
+              },
               child: Text(
                 'Sign up with Email',
                 style: TextStyle(fontSize: 16, color: Colors.white),
