@@ -17,13 +17,13 @@ class _Onboarding1 extends State<Onboarding1> {
       child: Column(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [_topimages(), const SizedBox(height: 14), _centerText()],
+        children: [_topSection(), const SizedBox(height: 14), _centerText()],
       ),
     );
   }
 
   // top images
-  Widget _topimages() {
+  Widget _topSection() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Text(

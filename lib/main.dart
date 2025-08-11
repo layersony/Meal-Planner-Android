@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mealplanner/screens/profile.dart';
 import 'package:mealplanner/screens/splashscreen.dart';
 
 void main() {
@@ -15,7 +16,10 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
-      routes: {'/': (context) => const SplashScreen()},
+      routes: {
+        '/': (context) => const SplashScreen(),
+        '/profile': (context) => const ProfileScreen(),
+      },
     );
   }
 }

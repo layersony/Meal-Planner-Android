@@ -1,46 +1,91 @@
 import 'package:flutter/material.dart';
 
-Widget onboarding2() {
-  return Center(
-    child: Column(
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        _topimages(),
-        const SizedBox(height: 16),
-        _centerText(),
-        const SizedBox(height: 16),
-        _bottomNavigation(),
-      ],
-    ),
-  );
+class Onboarding2 extends StatefulWidget {
+  const Onboarding2({super.key});
+
+  @override
+  _Onboarding createState() => _Onboarding();
 }
 
-// top images
-Widget _topimages() {
-  return Image.asset('assets/images/onboarding.jpg');
-}
+class _Onboarding extends State<Onboarding2> {
+  final List<String> selected = [];
 
-// center text
-Widget _centerText() {
-  return Column(
-    children: [
-      Text(
-        'Enjoy your lunch time 2',
-        style: TextStyle(fontWeight: FontWeight.w800, fontSize: 25),
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _topSection(),
+          const SizedBox(height: 16),
+          _middleSection(),
+          const SizedBox(height: 16),
+          _bottomText(),
+        ],
       ),
-      const SizedBox(height: 20),
-      Padding(
-        padding: EdgeInsets.all(20),
-        child: Text(
-          'Just relax and not overthink what to eat. This is in our side with our personalized meal plans just prepared and adapted to your needs',
-          textAlign: TextAlign.center,
-        ),
-      ),
-    ],
-  );
-}
+    );
+  }
 
-// button navigation
-Widget _bottomNavigation() {
-  return Text('_bottomNavigation');
+  // top images
+  Widget _topSection() {
+    return Text(
+      'Do you follow any of \nthese diets?',
+      style: TextStyle(fontWeight: FontWeight.w800, fontSize: 28),
+    );
+  }
+
+  Widget _middleSection() {
+    return Text(
+      'To offer you the best tailored diet \nexperience we need to know more \ninformation about you.',
+      textAlign: TextAlign.start,
+    );
+  }
+
+  // center text
+  Widget _bottomText() {
+    final List<String> diets = [
+      'None',
+      'Vegan',
+      'Paleo',
+      'Dukan',
+      'Atkins',
+      'Intermitted Fasting',
+    ];
+
+    return Padding(
+      padding: EdgeInsets.all(0),
+      child: Column(
+        children: [
+          SizedBox(height: 16.0),
+          Wrap(
+            spacing: 8.0,
+            runSpacing: 8.0,
+            children: diets.map((diet) {
+              final bool isSelected = selected.contains(diet);
+
+              return ChoiceChip(
+                label: Text(diet),
+                selected: isSelected,
+                onSelected: (bool isSelected) {
+                  setState(() {
+                    if (selected.contains(diet)) {
+                      selected.remove(diet);
+                    } else if (isSelected) {
+                      selected.add(diet);
+                    }
+                  });
+                },
+                selectedColor: Colors.purple,
+                labelStyle: TextStyle(
+                  color: isSelected ? Colors.white : Colors.black,
+                ),
+              );
+            }).toList(),
+          ),
+        ],
+      ),
+    );
+  }
 }

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mealplanner/screens/homepage.dart';
+import 'package:mealplanner/widgets/notifications.dart';
 import 'package:mealplanner/widgets/onboardingstep0.dart';
 import 'package:mealplanner/widgets/onboardingstep1.dart';
 import 'package:mealplanner/widgets/onboardingstep2.dart';
@@ -12,6 +14,7 @@ class OnboardingScreen extends StatefulWidget {
 
 class OnboardingState extends State<OnboardingScreen> {
   int currentPage = 0;
+  int lastPage = 3;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +45,7 @@ class OnboardingState extends State<OnboardingScreen> {
             else
               const SizedBox(),
 
-            if (currentPage < 2)
+            if (currentPage < lastPage)
               ElevatedButton(
                 onPressed: goNext,
                 style: ElevatedButton.styleFrom(
@@ -61,6 +64,31 @@ class OnboardingState extends State<OnboardingScreen> {
               )
             else
               const SizedBox(),
+
+            if (currentPage == lastPage)
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const HomepageScreen(),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromRGBO(138, 71, 235, 1),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                ),
+                child: Text(
+                  'Finish',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
           ],
         ),
       ),
@@ -72,14 +100,16 @@ class OnboardingState extends State<OnboardingScreen> {
       return onboarding0(context);
     } else if (currentPage == 1) {
       return Onboarding1();
+    } else if (currentPage == 2) {
+      return Onboarding2();
     } else {
-      return onboarding2();
+      return Notifications();
     }
   }
 
   void goNext() {
     setState(() {
-      if (currentPage < 2) {
+      if (currentPage < lastPage) {
         currentPage++;
       }
     });
